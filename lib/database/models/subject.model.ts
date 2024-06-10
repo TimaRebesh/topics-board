@@ -9,7 +9,7 @@ export interface ISubject {
 
 const SubjectSchema = new Schema<ISubject>({
   [SubjectKeys.NAME]: { type: String, required: true },
-  [SubjectKeys.VALUE]: { type: String, required: true },
+  [SubjectKeys.VALUE]: { type: String, default: '' },
 });
 
 const Subject = models.Subject || model('Subject', SubjectSchema);

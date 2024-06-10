@@ -40,7 +40,7 @@ export async function getBoard(boardId: string) {
   try {
     await connectToDB();
 
-    const board = Board.findById(boardId);
+    const board = await Board.findById(boardId);
 
     return JSON.parse(JSON.stringify(board));
   } catch (error) {

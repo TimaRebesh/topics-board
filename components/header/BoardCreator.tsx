@@ -8,6 +8,7 @@ import { createBoard } from '@/lib/actions/boards.actions';
 
 export const BoardCreator = () => {
 
+  const [open, setOpen] = useState(false);
   const [name, setName] = useState('');
 
   const onOpenChange = (open: boolean) => {
@@ -18,12 +19,13 @@ export const BoardCreator = () => {
 
   const createNewBoard = async () => {
     await createBoard(name);
+    setOpen(false);
   };
 
   return (
-    <Dialog onOpenChange={onOpenChange}>
+    <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogTrigger asChild>
-        <Button>+ Create New Board</Button>
+        <Button onClick={() => setOpen(true)}>+ Create New Board</Button>
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
@@ -42,12 +44,10 @@ export const BoardCreator = () => {
         </div>
 
         <DialogFooter>
-          <DialogClose asChild>
-            <Button type="button" variant="secondary">
-              Close
-            </Button>
-          </DialogClose>
-          <Button onClick={createNewBoard} disabled={name.length < 3}>Save </Button>
+          <Button onClick={() => setOpen(false)} variant="secondary">
+            Close
+          </Button>
+          <Button type="submit" onClick={createNewBoard} disabled={name.length < 3}>Save </Button>
         </DialogFooter>
 
       </DialogContent>

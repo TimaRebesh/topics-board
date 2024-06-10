@@ -8,16 +8,21 @@ export const NavItem = ({
   selected,
   children,
   tooltipText,
+  onClick
 }: {
-  href: Url;
+  href?: Url;
   selected: boolean;
   children: string;
   tooltipText?: string;
+  onClick?: () => void;
 }) => (
-  <li className="flex">
+  <li
+    className="flex"
+    {...(onClick ? { onClick } : {})}
+  >
     <TooltipWrapper text={tooltipText}>
       <Link
-        href={href}
+        href={href ?? '#'}
         className={`py-2 px-2 capitalize rounded-t-lg ${selected ? 'selected-item' : 'hover-item'}`}
       >
         {children}
